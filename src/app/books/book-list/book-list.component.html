@@ -1,1 +1,115 @@
-<p>book-list works!</p>
+<!-- <div class="card">
+  <p-table
+    [value]="products"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        Quản lý sách
+        <p-button>Thêm sách</p-button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Ảnh Bìa</th>
+        <th>Tên</th>
+        <th>Tác giả</th>
+        <th>Giá</th>
+        <th>Số lượng còn lại</th>
+        <th>Hành động</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>
+          <img
+            [src]="
+              'https://primefaces.org/cdn/primeng/images/demo/product/' +
+              product.image
+            "
+            [alt]="product.name"
+            width="100"
+            class="shadow-4"
+          />
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price | currency : "USD" }}</td>
+        <td>10</td>
+        <td>
+          <div class="flex gap-2">
+            <i class="pi pi-eye cursor-pointer" style="font-size: 1.2rem" (click)="navigateToBookDetail(product.id)"></i>
+            <i class="pi pi-file-edit cursor-pointer" style="font-size: 1.2rem"></i>
+            <i class="pi pi-trash cursor-pointer" style="font-size: 1.2rem"></i>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> -->
+<!-- layout="grid" -->
+<div class="card">
+  <p-dataView #dv [value]="products" [paginator]="true" [rows]="4">
+    <ng-template let-products pTemplate="listItem">
+        <div class="col-12" *ngFor="let item of products; let first = first" >
+          <div
+            (click)="navigateToBookDetail(item.id)"
+            class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4 cursor-pointer"
+            [ngClass]="{ 'border-top-1 surface-border': !first }"
+          >
+            <img
+              class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
+              [src]="
+                'https://primefaces.org/cdn/primeng/images/demo/product/' +
+                item.image
+              "
+              [alt]="item.name"
+            />
+            <div
+              class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4"
+            >
+              <div
+                class="flex flex-column align-items-center sm:align-items-start gap-3"
+              >
+                <div class="text-2xl font-bold text-900">{{ item.name }}</div>
+                <p-rating
+                  [(ngModel)]="item.rating"
+                  [readonly]="true"
+                  [cancel]="false"
+                ></p-rating>
+                <div class="flex align-items-center gap-3">
+                  <span class="flex align-items-center gap-2">
+                    <i class="pi pi-tag"></i>
+                    <span class="font-semibold">{{ item.category }}</span>
+                  </span>
+                  <p-tag
+                    [value]="item.inventoryStatus"
+                    [severity]="getSeverity(item)"
+                  ></p-tag>
+                </div>
+              </div>
+              <div
+                class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+              >
+                <span class="text-2xl font-semibold">{{
+                  "$" + item.price
+                }}</span>
+                <button
+                  pButton
+                  icon="pi pi-shopping-cart"
+                  class="md:align-self-end mb-2 p-button-rounded"
+                  [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </ng-template>
+  </p-dataView>
+</div>

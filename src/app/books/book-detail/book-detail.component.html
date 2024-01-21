@@ -1,0 +1,58 @@
+<div class="grid col-12">
+  <div class="col-5">
+    <div class="card">
+      <p-galleria
+        [value]="images"
+        [responsiveOptions]="responsiveOptions"
+        [containerStyle]="{ 'max-width': '640px' }"
+        [numVisible]="5"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.itemImageSrc" style="width: 100%" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <div class="grid grid-nogutter justify-content-center">
+            <img [src]="item.thumbnailImageSrc" />
+          </div>
+        </ng-template>
+      </p-galleria>
+    </div>
+  </div>
+  <div class="col-7">
+    <div class="flex flex-column gap-3">
+      <h3 class="text-3xl">
+        [Nhập ELSS2 giảm 500K] Máy giặt Samsung cửa trước Digital Inverter 8,5kg
+        (WW85T4040CX)_Miễn phí công lắp đặt
+      </h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vitae,
+        magni rerum ducimus, quidem animi, neque sed quae iusto numquam
+        praesentium! Accusantium voluptate molestias, laudantium temporibus
+        fugit minima! Placeat, officia!
+      </p>
+      <div>₫6.490.000</div>
+      <div class ="flex gap-2 align-items-center">
+        <span>Số lượng</span>
+        <p-inputNumber
+        [(ngModel)]="quantity"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        [min]="1"
+        [max]="100"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+    ></p-inputNumber>
+        <span>37 sản phẩm có sẵn</span>
+      </div>
+      <div class="flex gap-5 justify-content-start mt-5">
+        <p-button label="Thêm vào giỏ hàng" icon="pi pi-shopping-cart"></p-button>
+        <p-button label="Mua Ngay"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

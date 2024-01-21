@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 import { AuthModule } from "./auth/auth.module";
-import { BrowserModule } from "@angular/platform-browser";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HomeComponent } from "./pages/home/home.component";
-import { BooksModule } from "./books/books/books.module";
-import { HttpClientModule } from "@angular/common/http";
+import { BooksModule } from "./books/books.module";
+import { CartModule } from "./cart/cart.module";
+import { HeaderComponent } from "./shared/components/header/header.component";
+import { SharedModule } from "./shared/shared.module";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    HeaderComponent,
     CommonModule,
     RouterOutlet, 
-    AuthModule,
+    SharedModule,
     BooksModule,
-    HomeComponent
+    CartModule,
+    AuthModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

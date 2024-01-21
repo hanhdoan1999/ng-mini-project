@@ -26,6 +26,7 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userName");
+    localStorage.removeItem("isLogin");
     this.router.navigate(['login'])
   }
 
@@ -34,6 +35,6 @@ export class AuthService {
     // const helper = new JwtHelperService();
     // const isExpired = helper.isTokenExpired(token);
     // return !isExpired;
-    return token !== "";
+    return  token !== null;
   }
 }
