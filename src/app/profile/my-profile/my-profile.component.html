@@ -1,0 +1,17 @@
+
+<div class="container">
+	<div class="surface-section">
+		<div class="font-medium text-3xl text-900 mb-3">My Account</div>
+		<div class="text-500 mb-5">Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.</div>
+		<ul class="list-none p-0 m-0">
+			<li *ngFor="let info of userInfo" class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+				<div class="text-500 w-6 md:w-2 font-medium">{{info.name}}</div>
+				<div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{info.des}}</div>
+				<!-- <div class="w-6 md:w-2 flex justify-content-end">
+					<button pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-text" (click)="editUserInfo(info)"></button>
+				</div> -->
+			</li>
+			
+		</ul>
+	</div>
+</div>

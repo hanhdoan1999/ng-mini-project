@@ -1,21 +1,7 @@
 <div class="grid col-12">
   <div class="col-5">
     <div class="card">
-      <p-galleria
-        [value]="images"
-        [responsiveOptions]="responsiveOptions"
-        [containerStyle]="{ 'max-width': '640px' }"
-        [numVisible]="5"
-      >
-        <ng-template pTemplate="item" let-item>
-          <img [src]="item.itemImageSrc" style="width: 100%" />
-        </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-          <div class="grid grid-nogutter justify-content-center">
-            <img [src]="item.thumbnailImageSrc" />
-          </div>
-        </ng-template>
-      </p-galleria>
+      <!-- <p-image [src]="productDetail.image" alt="Image" width="250px"></p-image> -->
     </div>
   </div>
   <div class="col-7">
@@ -25,12 +11,9 @@
         (WW85T4040CX)_Miễn phí công lắp đặt
       </h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vitae,
-        magni rerum ducimus, quidem animi, neque sed quae iusto numquam
-        praesentium! Accusantium voluptate molestias, laudantium temporibus
-        fugit minima! Placeat, officia!
+        {{productDetail.description}}
       </p>
-      <div>₫6.490.000</div>
+      <div>{{productDetail.price |  currency:'VND':'symbol':'1.0-0'}}</div>
       <div class ="flex gap-2 align-items-center">
         <span>Số lượng</span>
         <p-inputNumber

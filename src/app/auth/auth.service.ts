@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Route, Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable } from "rxjs";
+import { apiUrl } from "../shared/api/api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  apiUrl: string = 'https://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -20,7 +19,7 @@ export class AuthService {
   // }
 
   login (username: string, password: string): Observable<any> {
-    return this.http.post(this.apiUrl + '/api/User/login', { username, password });
+    return this.http.post(apiUrl + 'auth/login', { username, password });
   }
 
   logout = () => {

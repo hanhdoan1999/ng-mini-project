@@ -7,8 +7,8 @@ import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [TabMenuModule,CommonModule],
+  // standalone: true,
+  // imports: [TabMenuModule,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -24,6 +24,7 @@ export class HeaderComponent {
       // { label: 'Admin', icon: 'pi pi-fw pi-home' },
       { label: 'My Account', icon: 'pi pi-users' },
       { label: 'Books', icon: 'pi pi-book' },
+      { label: 'Admin', icon: 'pi pi-users' },
       { label: 'Cart', icon: 'pi pi-shopping-cart' },
       {
         label: 'Logout',
@@ -44,8 +45,13 @@ export class HeaderComponent {
         this.router.navigate(['/cart']);
         break;
       case 'Books':
-      case 'My Account':
         this.router.navigate(['/list-book']);
+        break;
+      case 'My Account':
+        this.router.navigate(['/my-profile']);
+        break;
+      case 'Admin':
+        this.router.navigate(['/admin']);
         break;
       default:
         break;

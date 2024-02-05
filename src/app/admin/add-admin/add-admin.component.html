@@ -1,0 +1,89 @@
+<p-dialog header="Thêm Admin" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="formgrid grid">
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="fullName" class="mb-2">Họ tên</label>
+          <input formControlName="fullName" id="fullName" type="text" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('fullName')?.invalid && (registrationForm?.get('fullName')?.dirty || registrationForm?.get('fullName')?.touched)">
+            <div *ngIf="hasError('fullName', 'required')">Họ tên không được để trống</div>
+            <div *ngIf="hasError('fullName', 'maxlength')">Họ tên không được quá 50 ký tự.</div>        
+          </div>
+        </div>
+      </div>
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="username" class="mb-2">Tên đăng nhập</label>
+          <input formControlName="username" id="username" type="text" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('username')?.invalid && (registrationForm?.get('username')?.dirty || registrationForm?.get('username')?.touched)">
+            <div *ngIf="hasError('username', 'required')">Tên đăng nhập không được để trống</div>
+            <div *ngIf="hasError('username', 'maxlength')">Tên đăng nhập có độ dài tối đa 20 ký tự.</div>        
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="password" class="mb-2">Mật khẩu</label>
+          <input formControlName="password" id="password" type="password" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('password')?.invalid && (registrationForm?.get('password')?.dirty || registrationForm?.get('password')?.touched)">
+            <div *ngIf="hasError('password', 'required')">Mật khẩu không được để trống</div>
+            <div *ngIf="hasError('password', 'invalidPassword')">Mật khẩu có độ dài tối thiểu 8 ký tự, bao gồm ít nhất một chữ cái, một số và một ký tự đặc biệt.</div>
+          </div>
+        </div>
+      </div>
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="confirmPassword" class="mb-2">Nhập lại mật khẩu</label>
+          <input formControlName="confirmPassword" id="confirmPassword" type="password" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('confirmPassword')?.invalid && (registrationForm?.get('confirmPassword')?.dirty || registrationForm?.get('confirmPassword')?.touched)">
+            <div *ngIf="hasError('confirmPassword', 'required')">Vui lòng nhập mật khẩu</div>
+            <div *ngIf="hasError('confirmPassword', 'confirmedValidator')">Mật khẩu không khớp</div>
+          </div>
+        </div>    
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="email" class="mb-2">Email</label>
+          <input formControlName="email" id="email" type="text" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('email')?.invalid && (registrationForm?.get('email')?.dirty || registrationForm?.get('email')?.touched)">
+            <div *ngIf="hasError('email', 'required')">Email không được để trống</div>
+            <div *ngIf="hasError('email', 'email')">Email không đúng định dạng.</div>        
+          </div>
+        </div>
+      </div>
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="phone" class="mb-2">Số điện thoại</label>
+          <input formControlName="phone" id="phone" type="text" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('phone')?.invalid && (registrationForm?.get('phone')?.dirty || registrationForm?.get('phone')?.touched)">
+            <div *ngIf="hasError('phone', 'required')">Số điện thoại không được để trống</div>
+            <div *ngIf="hasError('phone', 'pattern')">Số điện thoại không đúng định dạng.</div>
+            <div *ngIf="hasError('phone', 'minlength')">Số điện thoại tối thiểu 10 kí tự.</div>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <div class="p-field flex flex-column mb-3">
+          <label for="address" class="mb-2">Địa chỉ</label>
+          <input formControlName="address" id="address" type="text" pInputText class="p-inputtext" />
+          <div class="text-red-400 font-normal text-sm mt-2" *ngIf="registrationForm?.get('address')?.invalid && (registrationForm?.get('address')?.dirty || registrationForm?.get('address')?.touched)">
+            <div *ngIf="hasError('address', 'required')">Địa chỉ không được để trống</div>
+            <div *ngIf="hasError('address', 'maxlength')">Địa chỉ không được quá 100 kí tự.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-field flex justify-content-end gap-2">
+      <p-button (click) = "closeModal()" label="Hủy" [text]="true" [raised]="true" severity="secondary"></p-button>
+      <button type="submit" [loading]="loading" pButton class="p-button">Lưu</button>
+      <!-- <p-button label="Submit" [loading]="loading" (onClick)="load()"></p-button> -->
+    </div>
+  </form>
+  
+</p-dialog>

@@ -1,4 +1,4 @@
-<!-- <div class="card">
+<div class="card">
   <p-table
     [value]="products"
     [tableStyle]="{ 'min-width': '60rem' }"
@@ -12,7 +12,7 @@
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         Quản lý sách
-        <p-button>Thêm sách</p-button>
+        <p-button (click) = "openModalAddBook()">Thêm sách</p-button>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -30,15 +30,14 @@
         <td>
           <img
             [src]="
-              'https://primefaces.org/cdn/primeng/images/demo/product/' +
               product.image
             "
-            [alt]="product.name"
+            [alt]="product.title"
             width="100"
             class="shadow-4"
           />
         </td>
-        <td>{{ product.name }}</td>
+        <td>{{ product.title }}</td>
         <td>{{ product.category }}</td>
         <td>{{ product.price | currency : "USD" }}</td>
         <td>10</td>
@@ -46,27 +45,26 @@
           <div class="flex gap-2">
             <i class="pi pi-eye cursor-pointer" style="font-size: 1.2rem" (click)="navigateToBookDetail(product.id)"></i>
             <i class="pi pi-file-edit cursor-pointer" style="font-size: 1.2rem"></i>
-            <i class="pi pi-trash cursor-pointer" style="font-size: 1.2rem"></i>
+            <i class="pi pi-trash cursor-pointer"  (click)="confirm2($event)" style="font-size: 1.2rem"></i>
           </div>
         </td>
       </tr>
     </ng-template>
   </p-table>
-</div> -->
+</div>
 <!-- layout="grid" -->
-<div class="card">
+
+ <!-- <div class="card">
   <p-dataView #dv [value]="products" [paginator]="true" [rows]="4">
     <ng-template let-products pTemplate="listItem">
         <div class="col-12" *ngFor="let item of products; let first = first" >
           <div
-            (click)="navigateToBookDetail(item.id)"
             class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4 cursor-pointer"
             [ngClass]="{ 'border-top-1 surface-border': !first }"
           >
             <img
               class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
               [src]="
-                'https://primefaces.org/cdn/primeng/images/demo/product/' +
                 item.image
               "
               [alt]="item.name"
@@ -77,9 +75,10 @@
               <div
                 class="flex flex-column align-items-center sm:align-items-start gap-3"
               >
-                <div class="text-2xl font-bold text-900">{{ item.name }}</div>
+                <div class="text-2xl font-bold text-900" (click)="navigateToBookDetail(item.id)">{{ item.title }}</div>
+                <div>{{ item.description}}</div>
                 <p-rating
-                  [(ngModel)]="item.rating"
+                  [(ngModel)]="item.rating.rate"
                   [readonly]="true"
                   [cancel]="false"
                 ></p-rating>
@@ -89,7 +88,7 @@
                     <span class="font-semibold">{{ item.category }}</span>
                   </span>
                   <p-tag
-                    [value]="item.inventoryStatus"
+                    [value]="item.rating.count"
                     [severity]="getSeverity(item)"
                   ></p-tag>
                 </div>
@@ -104,7 +103,7 @@
                   pButton
                   icon="pi pi-shopping-cart"
                   class="md:align-self-end mb-2 p-button-rounded"
-                  [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
+                  [disabled]="item.rating.count === 'OUTOFSTOCK'"
                 ></button>
               </div>
             </div>
@@ -112,4 +111,11 @@
         </div>
     </ng-template>
   </p-dataView>
-</div>
+</div> -->
+
+<p-confirmDialog></p-confirmDialog>
+
+<app-book-add
+[visible] = "visible"
+>
+</app-book-add>
