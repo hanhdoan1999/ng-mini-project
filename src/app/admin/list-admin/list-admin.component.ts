@@ -85,7 +85,9 @@ export class ListAdminComponent {
     return this.adminService.createAdmin(req).subscribe({
       next: (res: Admin) => {
         if(res) {
-          this.getAllAdmin();
+          // this.getAllAdmin();
+          this.users.unshift({...req, id: res.id});
+          console.log(this.users)
           this.utilService.showSuccessMessage(
             'Success',
             'Admin created successfully!',
@@ -111,7 +113,8 @@ export class ListAdminComponent {
     return this.adminService.editAdmin(id,request).subscribe({
       next: (res: Admin) => {
         if(res) {
-          this.getAllAdmin();
+          // this.getAllAdmin();
+          this.users = this.users.map((el)=> el.id === id ? {...el, id :id } : el);
           this.utilService.showSuccessMessage(
             'Success',
             'Admin updated successfully!',
@@ -135,7 +138,8 @@ export class ListAdminComponent {
     return this.adminService.deleteAdmin(id).subscribe({
       next: (res: any) => {
         if(res) {
-          this.getAllAdmin();
+          // this.getAllAdmin();
+          this.users = this.users.filter((el)=> el.id !== id);
           this.utilService.showSuccessMessage(
             'Success',
             'Delete Admin Successfully!',

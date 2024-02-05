@@ -30,11 +30,13 @@ export class LoginComponent {
     private router: Router
     ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,20}$/)]],
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$/)
-      ]]
+      username: [''],
+      password: ['']
+      // username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,20}$/)]],
+      // password: ['', [
+      //   Validators.required,
+      //   Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$/)
+      // ]]
     });
   }
 

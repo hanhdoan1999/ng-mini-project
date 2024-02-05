@@ -4,8 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-book-add',
-  standalone: true,
-  imports: [CommonModule, DialogModule, FormsModule ],
   templateUrl: './book-add.component.html',
   styleUrl: './book-add.component.css',
 })

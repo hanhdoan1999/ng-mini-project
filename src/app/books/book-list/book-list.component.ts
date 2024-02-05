@@ -18,24 +18,10 @@ import {
   MessageService,
   ConfirmEventType,
 } from 'primeng/api';
+import { CartService } from "../../cart/cart.service";
 
 @Component({
   selector: 'app-book-list',
-  standalone: true,
-  imports: [
-    TableModule,
-    ButtonModule,
-    CommonModule,
-    RatingModule,
-    TagModule,
-    DataViewModule,
-    FormsModule,
-    DropdownModule,
-    ConfirmDialogModule,
-    BookAddComponent,
-    
-  ],
-  providers: [ConfirmationService, MessageService],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css',
   
@@ -45,12 +31,15 @@ export class BookListComponent {
   sortOptions: any;
   sortOrder: number = 0;
   sortField: string = '';
+  sortKey: string= '';
   visible: boolean = false;
+  layout: string = 'list';
 
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private productService: BooksService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -127,5 +116,9 @@ export class BookListComponent {
       default:
         return '';
     }
+  }
+
+  handleAddToCart(product:any) {
+    this.cartService.addItemToCart(product);
   }
 }

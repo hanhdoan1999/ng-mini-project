@@ -1,37 +1,62 @@
-<div class="pt-4 pb-4">
-  <h2 class="text-center">Shopping Cart</h2>
-  <div class="mt-5 gap-3 gap-md-0 gap-lg-0">
-    <div class="col-lg-8 col-md-7">
-      <app-card>
-        <h4>Cart ({{stores.length}} items)</h4>
-        <app-store-item
-          *ngFor="let item of stores; let last = last"
-          [line]="!last"
-          [id]="item.id"
-          [image]="item.image"
-          [name]="item.name"
-          (handleLessEvent)="handleLess($event)"
-          (handlePlussEvent)="handlePluss($event)"
-          (handleRemoveEvent)="handleRemove($event)"
-          (handleFavoriteEvent)="handleFavorite($event)"
-        ></app-store-item>
-      </app-card>
-    </div>
-    <div class="col-lg-4 col-md-5">
-      <div class="gap-3">
-        <app-card>
-          <h4>The total amount of</h4>
-          <app-amount-store [totalOrder]="totalOrder"></app-amount-store>
-        </app-card>
-        <app-card>
-          <div class="d-flex align-items-center justify-content-between">
-            <p>Add a discount code (optional)</p>
-            <p>
-              <i class="fa fa-chevron-down"></i>
-            </p>
+<div class="container">
+  <div class="grid align-content-start">
+    <div class="col">
+      <div class="text-center">
+        <p-card header="Cart">
+          <div *ngIf = "totalPrice === 0">Không có sản phẩm nào để hiển thị</div>
+          <div class="card">
+            <div *ngFor="let item of stores; let last = last">
+              <app-store-item
+                [product]="item"
+                (handleLessEvent)="handleLess($event)"
+                (handlePlusEvent)="handlePlus($event)"
+                (handleRemoveEvent)="handleRemove($event)"
+                (handleFavoriteEvent)="handleFavorite($event)"
+              ></app-store-item>
+            </div>
           </div>
-        </app-card>
+        </p-card>
       </div>
     </div>
+    <div class="col-fixed" style="width: 400px" *ngIf = "totalPrice > 0">
+        <p-card header="Total">
+          <div class="grid pt-4">
+            <div class="col-6">
+              <div >
+                Total Price
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                {{  totalPrice | currency : "USD" }}
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                Total Shipping
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                {{  15| currency : "USD" }}
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                Total
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                {{  totalPriceFinal| currency : "USD" }}
+              </div>
+            </div>
+          </div>
+        </p-card>
+        <div class="mt-5">
+          <p-button label="CHECK OUT" (click)="navigateCheckoutPage()"></p-button>
+        </div>
+    </div>
   </div>
+  
 </div>

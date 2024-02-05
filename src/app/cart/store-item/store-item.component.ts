@@ -1,41 +1,50 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-store-item',
   templateUrl: './store-item.component.html',
   styleUrls: ['./store-item.component.css']
 })
-export class StoreItemComponent {
+export class StoreItemComponent  implements OnChanges {
   @Input() id: number = 0;
-  @Input() image: string = "";
-  @Input() name: string = "";
-  @Input() code: string = "";
-  @Input() color: string = "";
-  @Input() size: string = "";
-  @Input() price: number = 0;
-  @Input() note?: string = "";
-  @Input() line?: boolean;
+  @Input() product: any = {};
 
-  @Output() handleLessEvent: EventEmitter<number> = new EventEmitter<number>();
-  @Output() handlePlussEvent: EventEmitter<number> = new EventEmitter<number>();
-  @Output() handleRemoveEvent: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() handleLessEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handlePlusEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handleRemoveEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() handleFavoriteEvent: EventEmitter<number> = new EventEmitter<number>();
 
-  get order(): number {
-    // You can modify this logic based on your application's requirements
-    return 0;
+  item : any = {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['product']) {
+      const { product, quantity } = this.product;
+      this.item = {
+        ...product,
+        quantity,
+        totalPrice: product.price * quantity
+      };
+    }
   }
 
-  handleLess() {
-    this.handleLessEvent.emit(this.id);
+  handleInput(event: any, item: any) {
+    const req = {
+      product:item,
+      // quantity: 1
+      quantity: event?.value
+    }
+    if (event.value > event.formattedValue) {
+      this.handlePlusEvent.emit(req);
+    } else if (event.value < event.formattedValue) {
+      this.handleLessEvent.emit(req);
+    }
+    this.item.quantity = event.value;
+    this.item.totalPrice = this.item.price * event.value;
   }
 
-  handlePluss() {
-    this.handlePlussEvent.emit(this.id);
-  }
-
-  handleRemove() {
-    this.handleRemoveEvent.emit(this.id);
+  handleRemove(item:any) {
+    this.handleRemoveEvent.emit(item);
   }
 
   handleFavorite() {

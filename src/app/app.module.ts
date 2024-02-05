@@ -25,8 +25,10 @@ import { AppRoutingModule } from "./app.routes";
 import { AdminModule } from "./admin/admin.module";
 import { TabMenuModule } from "primeng/tabmenu";
 import { ProfileModule } from "./profile/profile.module";
-
-
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BooksModule } from "./books/books.module";
+import { DataViewModule } from "primeng/dataview";
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,10 +36,10 @@ import { ProfileModule } from "./profile/profile.module";
     // Other components, directives, or pipes go here
   ],
   imports: [
+    BooksModule,
     ProfileModule,
     SharedModule,
     AdminModule,
-    CartModule,
     AuthModule,
     CartModule,
     BrowserModule,
@@ -56,7 +58,10 @@ import { ProfileModule } from "./profile/profile.module";
     DropdownModule,
     ButtonModule,
     AppRoutingModule,
-    TabMenuModule
+    TabMenuModule,
+    AvatarModule,
+    AvatarGroupModule,
+    DataViewModule
       // Other modules go here
   ],
   providers: [ConfirmationService],

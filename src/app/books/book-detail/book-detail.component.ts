@@ -9,8 +9,6 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-book-detail',
-  standalone: true,
-  imports: [CommonModule, GalleriaModule, InputNumberModule, FormsModule, ButtonModule],
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.css'
 })
